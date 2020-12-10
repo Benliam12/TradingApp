@@ -79,15 +79,17 @@ wsServer = new WebSocketServer({
     autoAcceptConnections: false
 });
 
-
-
 wsServer.on("request", (request) => {
 
     var connection = request.accept(null, request.origin)
 
+    console.log("New connexion from " + request.origin + " (" + connection.remoteAddress + ")");
+
     connection.on('message', function(message) {
         if (message.type === 'utf8') {
             console.log('Received Message: ' + message.utf8Data);
+            var response = message.utf8Data.split(",")
+            wsServer.broadcast(response[1]);
             // connection.sendUTF(message.utf8Data);
         } else if (message.type === 'binary') {
             console.log('Received Binary Message of ' + message.binaryData.length + ' bytes');

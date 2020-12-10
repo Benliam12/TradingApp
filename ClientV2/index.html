@@ -16,15 +16,30 @@
 
         <table class="table">
             <tr>
-                <td>Amount</td>
+                <td colspan="2">
+                    <input class="form-control" type="text" name="username" id="username" placeholder="username">
+                </td>
             </tr>
 
             <tr>
-                <td id="amount"><br></td>
+                <td colspan="2" class="text-center">Amount</td>
             </tr>
 
             <tr>
-                <td id="btn_recon"><button id="connect-btn" class="btn btn-success">Connect</button></td>
+                <td colspan="2" id="amount" class="center"><br></td>
+            </tr>
+
+            <tr>
+                <td colspan="2"><input value="0" type="number" class="form-control" name="" id="user_amount"></td>
+            </tr>
+
+            <tr>
+                <td><button id="buy-btn" class="btn btn-lg btn-block btn-success">Buy</button></td>
+                <td><button id="sell-btn" class="btn btn-lg btn-block btn-danger">Sell</button></td>
+            </tr>
+
+            <tr>
+                <td colspan="2" id="btn_recon"><button id="connect-btn" class="btn btn-lg btn-block btn-success">Connect</button></td>
             </tr>
         </table>
     </div>
