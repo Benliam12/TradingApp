@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        const t = {
+            lol: 2
+        }
+
+        haha = t.ha;
+        console.log(haha)
+
+        function affCalories() {
+            cals = [85, 115, 100, 85];
+            cal = 0;
+            var sorte = document.getElementsByName("radSorteChoco");
+            var label = document.getElementById("nbrCalorie");
+            var nuts = document.getElementsByName("radPresenceNoix")[0]
+            for (var i = 0; i < sorte.length; i++) {
+                if (sorte[i].checked) {
+                    cal = cals[i];
+                    break;
+                }
+            }
+            if (cal == 0) {
+                label.innerHTML = "Vous devez d'abord préciser une sorte de chocolat!"
+                return;
+            }
+            if (nuts.checked) {
+                cal += 40
+            }
+            label.innerHTML = cal
+        }
+
+        function reinitialiser() {
+            var sorte = document.getElementsByName("radSorteChoco");
+            var nuts = document.getElementsByName("radPresenceNoix")[1];
+            var label = document.getElementById("nbrCalorie");
+
+            for (var i = 0; i < sorte.length; i++) {
+                sorte[i].checked = false;
+            }
+            nuts.checked = true;
+            label.innerHTML = "";
+        }
+
+        const clics = [1040, 20333, 1332, 4285, 7766, 100004, 789, 9992, 88543, 9893, 9834, 7643];
+
+        function afficherStats() {
+            var nbClic = 0;
+            var avg = 0;
+            var max = 0;
+            for (var i = 0; i < clics.length; i++) {
+                nbClic += clics[i];
+                if (clics[i] > max) {
+                    max = clics[i];
+                }
+            }
+            avg = Math.round(nbClic / clics.length);
+            document.getElementById("nbClics").innerHTML = nbClic;
+            document.getElementById("nbClicsMoyen").innerHTML = avg;
+            document.getElementById("nbClicsMax").innerHTML = max;
+        }
+    </script>
+</head>
+
+<body>
+    nbclick <span id="nbClics">0</span><br> nbclick moyen <span id="nbClicsMoyen">0</span><br> nbclick max <span id="nbClicsMax">0</span><br>
+    <button onclick="afficherStats()">Afficher</button>
+</body>
+
+</html>
