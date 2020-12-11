@@ -4,6 +4,7 @@ var app = express();
 var path = require('path');
 var sqlite3 = require("sqlite3").verbose();
 var WebSocketServer = require("websocket").server;
+var application = require('./app');
 
 let db = new sqlite3.Database("db.db", (err) => {
     if (err) {
