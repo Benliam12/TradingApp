@@ -3,6 +3,7 @@ function reconnect() {
     window.number = Math.round(Math.random() * 0xFFFFFF);
 
     window.connection = new WebSocket("ws://localhost:8080?user=" + number.toString());
+    //window.connection = new WebSocket("ws://localhost:8080");
 
     connection.onopen = function() {
         window.isconnected = true;
@@ -18,7 +19,8 @@ function reconnect() {
     }
 
     connection.onerror = function(message) {
-        console.log(message)
+        console.log(message);
+        window.isconnected = false;
     }
 
     connection.onclose = function() {
@@ -65,9 +67,4 @@ $(function() {
             }
         }
     });
-
-
-
-
-
 })
