@@ -27,6 +27,15 @@ db.serialize(() => {
         );`
     );
 
+    db.each(`
+        CREATE TABLE IF NOT EXISTS orders (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id int(11),
+            amount int(11),
+            created DATE
+        )
+    `)
+
     /*db.each(`
             INSERT INTO accounts(username,password,tokens) VALUES(?,?,?)
     `, ['Benliam12', "haha", 0]);*/
@@ -82,8 +91,8 @@ wsServer = new WebSocketServer({
 wsServer.on("request", (request) => {
 
     var connection = request.accept(null, request.origin)
-
-    console.log("New connexion from " + request.origin + " (" + connection.remoteAddress + ")");
+    var user = request.resourceURL.query.user
+    console.log("New connexion from " + request.origin + " (" + user + ")");
 
     connection.on('message', function(message) {
         if (message.type === 'utf8') {
@@ -97,9 +106,8 @@ wsServer.on("request", (request) => {
         }
     });
 
-
     connection.on('close', function(reasonCode, description) {
-        console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
+        console.log((new Date()) + ' Peer ' + user + ' disconnected.');
     });
 
 })

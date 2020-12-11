@@ -1,7 +1,8 @@
 function reconnect() {
     window.WebSocket = window.WebSocket || window.MozWebSocket;
+    window.number = Math.round(Math.random() * 0xFFFFFF);
 
-    window.connection = new WebSocket("ws://localhost:8080");
+    window.connection = new WebSocket("ws://localhost:8080?user=" + number.toString());
 
     connection.onopen = function() {
         window.isconnected = true;
@@ -30,10 +31,6 @@ function reconnect() {
 }
 
 $(function() {
-
-    var number = Math.round(Math.random() * 0xFFFFFF);
-    $("#username").val(number);
-
     window.connection = null;
     console.log("GOOD");
 
@@ -53,20 +50,18 @@ $(function() {
 
     $("#buy-btn").click(function() {
         if (window.isconnected) {
-            var amount = $("#user_amount").val();
+            var amount = parseInt($("#user_amount").val());
             if (amount > 0) {
-                var value = $("#username").val().toString();
-                window.connection.send(value + "," + amount.toString() + ",buy");
+                window.connection.send(number + "," + amount.toString() + ",buy");
             }
         }
     });
 
     $("#sell-btn").click(function() {
         if (window.isconnected) {
-            var amount = $("#user_amount").val();
+            var amount = parseInt($("#user_amount").val());
             if (amount > 0) {
-                var value = $("#username").val().toString();
-                window.connection.send(value + "," + amount.toString() + ",sell");
+                window.connection.send(number + "," + amount.toString() + ",sell");
             }
         }
     });
