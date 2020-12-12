@@ -33,6 +33,7 @@ function reconnect() {
 }
 
 $(function() {
+
     window.connection = null;
     console.log("GOOD");
 
@@ -57,6 +58,14 @@ $(function() {
                 window.connection.send(number + "," + amount.toString() + ",buy");
             }
         }
+
+
+        $.post("http://localhost:8080/trade", { user: "John" }, function(data) {
+                console.log(data)
+            })
+            .fail(function() {
+                console.log("Couldn't post!")
+            })
     });
 
     $("#sell-btn").click(function() {

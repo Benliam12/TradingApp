@@ -2,11 +2,37 @@ var express = require('express');
 var http = require("http");
 var app = express();
 var path = require('path');
+var bodyParser = require("body-parser")
 var WebSocketServer = require("websocket").server;
 //var database = require('./custom_modules/db');
 
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/views/index.html'));
+});
+
+
+app.post("/trade", function(req, res) {
+    if (req.body.user != undefined) {
+        console.log(req.body.user);
+
+        // Website you wish to allow to connect
+        res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5500');
+
+        // Request methods you wish to allow
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+        // Request headers you wish to allow
+        res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+        // Set to true if you need the website to include cookies in the requests sent
+        // to the API (e.g. in case you use sessions)
+        res.setHeader('Access-Control-Allow-Credentials', true);
+
+        res.send("YOLO")
+    }
 });
 
 var server = http.createServer(app);
@@ -49,6 +75,9 @@ wsServer.on("request", (request) => {
     console.log("New connexion from " + request.origin + " (" + user + ")");
 
     connection.on('message', function(message) {
+
+        return;
+
         if (message.type === 'utf8') {
             console.log('Received Message: ' + message.utf8Data);
             var response = message.utf8Data.split(",")
