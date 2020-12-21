@@ -4,7 +4,11 @@ var app = express();
 var path = require('path');
 var bodyParser = require("body-parser")
 var WebSocketServer = require("websocket").server;
-//var database = require('./custom_modules/db');
+var passwordHash = require("password-hash")
+var User = require("./custom_modules/user")
+    //var database = require('./custom_modules/db');
+
+
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -107,3 +111,9 @@ function broadcast() {
 }
 
 broadcast();
+
+var test_pass = passwordHash.generate("TOTO")
+var verif = passwordHash.verify("TOTO", "sha1$ef1e1493$1$1bda181b9d79c81414e378841af76e875be74aee")
+console.log(test_pass)
+
+console.log(verif)

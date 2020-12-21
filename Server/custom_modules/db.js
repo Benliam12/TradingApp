@@ -55,8 +55,4 @@ db.close((err) => {
     console.log("Closed database with success")
 })
 
-
-
-
-
 module.export = db

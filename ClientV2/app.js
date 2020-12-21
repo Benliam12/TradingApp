@@ -1,3 +1,7 @@
+class session {
+
+}
+
 function reconnect() {
     window.WebSocket = window.WebSocket || window.MozWebSocket;
     window.number = Math.round(Math.random() * 0xFFFFFF);
@@ -59,8 +63,7 @@ $(function() {
             }
         }
 
-
-        $.post("http://localhost:8080/trade", { user: "John" }, function(data) {
+        $.post("http://localhost:8080/trade", { user: window.number }, function(data) {
                 console.log(data)
             })
             .fail(function() {
