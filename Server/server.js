@@ -6,7 +6,9 @@ var bodyParser = require("body-parser")
 var WebSocketServer = require("websocket").server;
 var passwordHash = require("password-hash")
 var User = require("./custom_modules/user")
-    //var database = require('./custom_modules/db');
+var readline = require("readline")
+var sqlite3 = require("sqlite3").verbose();
+var database = require('./custom_modules/db');
 
 
 
@@ -117,3 +119,18 @@ var verif = passwordHash.verify("TOTO", "sha1$ef1e1493$1$1bda181b9d79c81414e3788
 console.log(test_pass)
 
 console.log(verif)
+
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+
+process.on('SIGINT', () => {
+    database.close((err) => {
+        if (err) {
+            return console.error(err.message)
+        }
+        console.log("Closed database with success")
+    })
+});

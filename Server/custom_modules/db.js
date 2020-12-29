@@ -8,7 +8,7 @@ let db = new sqlite3.Database("db.db", (err) => {
     console.log("Connected to in memory db");
 });
 
-
+/*
 db.serialize(() => {
     db.each(
         `CREATE TABLE IF NOT EXISTS accounts (
@@ -28,10 +28,6 @@ db.serialize(() => {
         )
     `)
 
-    /*db.each(`
-            INSERT INTO accounts(username,password,tokens) VALUES(?,?,?)
-    `, ['Benliam12', "haha", 0]);*/
-
     db.each(`
         UPDATE accounts SET tokens = ? WHERE id = ?
     `, [25120, 1], (err) => {})
@@ -48,11 +44,17 @@ db.serialize(() => {
     `, [250, 1], (err) => {})
 });
 
+*/
+
+
+
+/*
 db.close((err) => {
     if (err) {
         return console.error(err.message)
     }
     console.log("Closed database with success")
 })
+*/
 
-module.export = db
+module.exports = db
