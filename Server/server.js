@@ -7,14 +7,13 @@ var WebSocketServer = require("websocket").server;
 var passwordHash = require("password-hash")
 var User = require("./custom_modules/user")
 var readline = require("readline")
-var sqlite3 = require("sqlite3").verbose();
 var database = require('./custom_modules/db');
-
-
+var session = require("express-session")
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-
+app.use(session({secret:"secretkeyforcookies"}))
+ 
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/views/index.html'));
 });

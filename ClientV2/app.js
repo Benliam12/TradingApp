@@ -1,6 +1,3 @@
-class session {
-
-}
 
 function reconnect() {
     window.WebSocket = window.WebSocket || window.MozWebSocket;
