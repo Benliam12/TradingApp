@@ -13,7 +13,7 @@
     "express-session": "^1.17.1",
     "https": "^1.0.0",
     "password-hash": "^1.2.2",
-    "sqlite3": "^5.0.0",
+    "sqlite3": "^5.0.1",
     "websocket": "^1.0.33"
   }
 }

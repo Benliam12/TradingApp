@@ -1,4 +1,3 @@
-
 function reconnect() {
     window.WebSocket = window.WebSocket || window.MozWebSocket;
     window.number = Math.round(Math.random() * 0xFFFFFF);
@@ -76,4 +75,31 @@ $(function() {
             }
         }
     });
+
+    $("#register-btn").click(function() {
+        $.post("http://localhost:8080/login", { user: window.number }, function(data) {
+                console.log(data)
+                console.log("HEHE")
+            })
+            .fail(function() {
+                console.log("Couldn't post!")
+            })
+
+    });
+
+    $("#main-form").submit(function(e) {
+        console.log(1)
+        $("#login-btn").click(function() {
+            $.post("http://localhost:8080/login", { user: window.number }, function(data) {
+                    console.log(data)
+                    console.log("HEHE")
+                })
+                .fail(function() {
+                    console.log("Couldn't post!")
+                })
+
+        });
+        e.preventDefault()
+
+    })
 })
